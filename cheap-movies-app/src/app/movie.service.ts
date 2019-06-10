@@ -12,7 +12,7 @@ import { HttpService } from './http.service';
 export class MovieService {
 
   moviesUrlSuffix = 'summary';
-  movieDetailUrlSuffix = 'detail';
+  movieDetailUrlSuffix = 'detail/';
   retryCount = 3;
 
   constructor(private httpService: HttpService) { }
@@ -40,9 +40,9 @@ export class MovieService {
       );
   }
 
-  getMovieDetails(movies: Movie[]): Observable<MovieDetail[]> {
-    // return this.httpService.performGet(this.moviesUrlSuffix)
-    return of(this.allMoviesDetail)
+  getMovieDetails(movieId: string): Observable<MovieDetail> {
+    return this.httpService.performGet(this.movieDetailUrlSuffix+movieId)
+    // return of(this.allMoviesDetail[0])
       .pipe(
         retry(this.retryCount),
         // map(movieSummary => this.populateMovieDetails(movies, movieSummary)),
@@ -55,10 +55,10 @@ export class MovieService {
 
 
 
-  allMoviesDetail: MovieDetail[] = [
-    { id: '0086190', type: 'Dr Nice' , plot: 'ploat a'},
-    { id: '0121765', type: 'Narco',plot: 'ploat a' },
-    { id: '0121766', type: 'Bombasto' ,plot: 'ploat a'},
-    { id: '0120915', type: 'Tornado' ,plot: 'ploat a'}
-  ];
+  // allMoviesDetail: MovieDetail[] = [
+  //   { id: '0086190', type: 'Dr Nice' , plot: 'ploat a'},
+  //   { id: '0121765', type: 'Narco',plot: 'ploat a' },
+  //   { id: '0121766', type: 'Bombasto' ,plot: 'ploat a'},
+  //   { id: '0120915', type: 'Tornado' ,plot: 'ploat a'}
+  // ];
 }

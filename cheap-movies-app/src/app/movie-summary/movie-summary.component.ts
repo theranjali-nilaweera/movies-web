@@ -23,24 +23,36 @@ export class MovieSummaryComponent implements OnInit {
 
   getMovieSummaries(): void {
     this.movieService.getMovieWithSummary()
-      .subscribe(movies => {this.movies = movies;  this.getMovieDetails();
+      .subscribe(movies => {this.movies = movies; this.sortMovies(); this.getMovieDetails();
          });
   }
 
+  sortMovies(): void {
+    this.movies.sort((mv1,mv2) => mv1.summary.year-mv2.summary.year );
+  }
   getMovieDetails(): void {
-    this.movieService.getMovieDetails(this.movies)
-      .subscribe(movieDetails => {
-        this.movieDetails = movieDetails;
-        this.populateMovieDetails(this.movies, movieDetails);
-      });
+    this.movies.forEach( movie => {
+      this.movieService.getMovieDetails(movie.id)
+        .subscribe(movieDetail => {
+          // this.movieDetails = movieDetail;
+          this.populateMovieDetails(this.movies, movieDetail);
+        });
+    });
   }
 
-  private populateMovieDetails(movies, movieDetails): Movie[]{
-    return movies.forEach(movie => {
-      let movieDetail = (movieDetails.find((itmInner) => itmInner.id === movie.id))
-      console.log('movie  Detail%j',movieDetail);
-      return this.populateDetail(movie, movieDetail);
-    })
+  private populateMovieDetails(movies, movieDetail): void{
+     movies.filter(movie => {
+       console.log('movie  movie.id  %j== movieDetail.id; %j',movie.id, movieDetail.id);
+       return movie.id == movieDetail.id;
+     }).forEach(movie => {
+       movie.detail= movieDetail;
+       console.log('movie  Detail%j',movie);
+       // this.populateDetail(movie, movieDetail);
+     })
+      // let movieDetail = (movieDetail.find((itmInner) => itmInner.id === movie.id))
+
+      // return this.populateDetail(movie, movieDetail);
+    // })
   }
 
   private populateDetail(movie, detail): Movie {
