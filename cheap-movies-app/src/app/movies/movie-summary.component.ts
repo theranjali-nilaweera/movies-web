@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { map } from 'rxjs/operators';
-import { Movie } from '../Movie';
+import { Movie } from './Movie';
 import { MovieService } from '../movie.service';
-import {MovieDetail} from "../MovieDetail";
+import {MovieDetail} from "./MovieDetail";
 
 
 @Component({

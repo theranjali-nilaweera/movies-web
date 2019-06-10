@@ -1,11 +1,11 @@
 <div *ngIf="!movies">Loading..</div>
-<mat-spinner></mat-spinner>
 <mat-card class="movie-card" *ngFor="let movie of movies">
   <mat-card-header cla="movie-header">
     <mat-card-title>{{movie.summary.title  }}</mat-card-title>
     <mat-card-subtitle>{{movie.summary.year}}</mat-card-subtitle>
   </mat-card-header>
   <img mat-card-image src="http://via.placeholder.com/300x350">
+  <div *ngIf="!movie.detail">Loading..</div>
   <mat-card-content *ngIf="movie.detail">
     <p>{{movie.detail.plot}}</p>
     <li *ngFor="let ticket of movie.detail.prices">

@@ -6,7 +6,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { MovieSummaryComponent } from './movie-summary/movie-summary.component';
+import { MovieSummaryComponent } from './movies/movie-summary.component';
 
 @NgModule({
   declarations: [

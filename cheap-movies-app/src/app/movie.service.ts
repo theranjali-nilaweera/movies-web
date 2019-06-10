@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { map, retry, catchError } from 'rxjs/operators';
-import { Movie } from './Movie';
-import { MovieDetail } from './MovieDetail';
-import { MovieSummary } from './MovieSummary';
+import { Movie } from './movies/Movie';
+import { MovieDetail } from './movies/MovieDetail';
+import { MovieSummary } from './movies/MovieSummary';
 import { HttpService } from './http.service';
 
 @Injectable({
