@@ -2,8 +2,9 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { map, retry, catchError } from 'rxjs/operators';
 import { Movie } from './Movie';
+import { MovieDetail } from './MovieDetail';
+import { MovieSummary } from './MovieSummary';
 import { HttpService } from './http.service';
-
 
 @Injectable({
   providedIn: 'root'
@@ -16,14 +17,41 @@ export class MovieService {
 
   constructor(private httpService: HttpService) { }
 
-  getMovieSummaries(): Observable<Movie[]> {
+  populateMoviesFromSummary(movieSummaries): Movie[]{
+    return movieSummaries.map(summary => {
+      return this.populateSummary(summary);
+    });
+  }
+  populateSummary(summary): Movie {
+    let movie = new Movie();
+    movie.id = summary.id;
+    movie.summary= summary;
+    console.log('movie %j',movie);
+    return movie;
+  }
+  getMovieWithSummary(): Observable<Movie[]> {
     return this.httpService.performGet(this.moviesUrlSuffix)
+      .pipe(
+        retry(this.retryCount),
+        map(movieSummary => this.populateMoviesFromSummary(movieSummary)),
+        catchError((error, caught) => {
+          console.log(error);
+          return caught;
+        })
+      );
+  }
+
+  getMovieDetails(movies: Movie[]): Observable<MovieDetail[]> {
+    // return this.httpService.performGet(this.moviesUrlSuffix)
+    return of(this.allMoviesDetail)
       .pipe(
         retry(this.retryCount),
         catchError((error, caught) => {
           console.log(error);
           return caught;
         })
+      ).pipe(
+
       );
   }
 
@@ -32,10 +60,10 @@ export class MovieService {
   //
   // }
 
-  allMovies: Movie[] = [
-    { id: '11', title: 'Dr Nice' },
-    { id: '12', title: 'Narco' },
-    { id: '13', title: 'Bombasto' },
-    { id: '20', title: 'Tornado' }
+  allMoviesDetail: MovieDetail[] = [
+    { id: '0086190', type: 'Dr Nice' , plot: 'ploat a'},
+    { id: '0121765', type: 'Narco',plot: 'ploat a' },
+    { id: '0121766', type: 'Bombasto' ,plot: 'ploat a'},
+    { id: '0120915', type: 'Tornado' ,plot: 'ploat a'}
   ];
 }

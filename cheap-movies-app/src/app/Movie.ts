@@ -1,8 +1,9 @@
+import { MovieDetail } from './MovieDetail';
+import { MovieSummary } from './MovieSummary';
+
 export class Movie {
-  public title: string;
-  public year?: number;
   public id: string;
-  public type?: string;
-  public poster?: string;
+  public summary ?: MovieSummary;
+  public detail ?: MovieDetail;
 
 }

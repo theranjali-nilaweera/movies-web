@@ -19,9 +19,14 @@ export class MovieSummaryComponent implements OnInit {
   }
 
   getMovieSummaries(): void {
-    this.movieService.getMovieSummaries()
+    this.movieService.getMovieWithSummary()
       .subscribe(movies => this.movies = movies);
   }
+
+  // getMovieDetails(): void {
+  //   this.movieService.getMovieDetails(this.movieService)
+  //     .subscribe(movies => this.movies = movies);
+  // }
 
 }
 
