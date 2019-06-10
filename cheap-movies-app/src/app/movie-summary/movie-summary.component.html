@@ -1,0 +1,14 @@
+<mat-card class="movie-card" *ngFor="let movie of movies">
+  <mat-card-header cla="movie-header">
+    <mat-card-title>{{movie.title}}</mat-card-title>
+    <mat-card-subtitle>{{movie.year}}</mat-card-subtitle>
+  </mat-card-header>
+  <img mat-card-image src="http://via.placeholder.com/300x350">
+  <mat-card-content>
+    <p>
+      The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
+      A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
+      bred for hunting.
+    </p>
+  </mat-card-content>
+</mat-card>
