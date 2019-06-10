@@ -26,7 +26,6 @@ export class MovieService {
     let movie = new Movie();
     movie.id = summary.id;
     movie.summary= summary;
-    console.log('movie %j',movie);
     return movie;
   }
   getMovieWithSummary(): Observable<Movie[]> {
@@ -46,19 +45,15 @@ export class MovieService {
     return of(this.allMoviesDetail)
       .pipe(
         retry(this.retryCount),
+        // map(movieSummary => this.populateMovieDetails(movies, movieSummary)),
         catchError((error, caught) => {
           console.log(error);
           return caught;
         })
-      ).pipe(
-
       );
   }
 
 
-  // transformMovieSummaries(response): Movie[] {
-  //
-  // }
 
   allMoviesDetail: MovieDetail[] = [
     { id: '0086190', type: 'Dr Nice' , plot: 'ploat a'},
