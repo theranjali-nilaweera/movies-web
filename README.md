@@ -18,6 +18,11 @@ Or
 cd cheap-movies-app
 ./run-local.sh
 ```
-
+The app should be available at below URL locally
+```
 http://localhost:4200/
+```
+
+
+[![Play example video](https://github.com/theranjali-nilaweera/movies-web/blob/master/preview.png )](https://youtu.be/IP1g8pjJfu4)
 
