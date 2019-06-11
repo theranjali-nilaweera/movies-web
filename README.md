@@ -5,6 +5,7 @@
 
 ## Next steps
 * Create a docker container to serve the API and serve this web app on the same contaner using nginx
+* Make it offline capable by using localStorage
 
 ## Steps
 Download code base
